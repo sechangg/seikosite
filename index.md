@@ -8,13 +8,13 @@ layout: default
 
 ## The Idea
 
-**The course should add parallel tracks in different languages, because it will make the coursework more intuitive for students who have experience in and inclinations toward certain languages.** Today every COMP110 student is taught in Python. My hypothesis is that students arrive with meaningfully different language backgrounds and programming experience, and that a one-size-fits-all track under-serves the more experienced students at one end and may still miss lower-friction on-ramps for students coming from other paradigms.
+**The course should add parallel tracks in different languages, because it will make the coursework more intuitive for students who have experience in and inclinations toward certain languages.** Right now every COMP110 student is taught in Python, but that can be a little grating for people who prefer a different language. My hypothesis is that students arrive with meaningfully different language backgrounds and programming experience, and that a one-size-fits-all track under-serves the more experienced students at one end and may still miss lower-friction on-ramps for students coming from other paradigms.
 
 ## Summary of the Analysis
 
-I combined the two anonymized survey files (`survey_izzi.csv` and `survey_alyssa.csv`) into a single column-oriented table using the `columnar` and `concat` utilities from `data_utils.py`, then narrowed the table to the columns most relevant to this question: `comp_major`, `prior_exp`, `prior_time`, `languages`, and the six self-reported course-experience metrics (`pace`, `difficulty`, `understanding`, `interesting`, `valuable`, `would_recommend`). The six course-experience columns were converted to integers for averaging.
+I combined the two anonymized survey files (`survey_izzi.csv` and `survey_alyssa.csv`) into a single column-oriented table using the `columnar` and `concat` utilities from `data_utils.py`, then narrowed the table to the columns most relevant to this question: `comp_major`, `prior_exp`, `prior_time`, `languages`, and the six self-reported course-experience metrics (`pace`, `difficulty`, `understanding`, `interesting`, `valuable`, `would_recommend`). Then I converted the six course-experience columns to integers for averaging.
 
-I wrote a custom `group_by` function in `data_utils.py` that takes a column-oriented table and a column name, splits each cell of that column on commas (so a student who knows `"Python, Java / C#"` is counted in both groups), and returns a `dict[str, dict[str, list[str]]]` keyed by the distinct category values. Using this, I grouped the merged table three ways and computed per-group averages across the six course-experience metrics, producing three complementary views of the student population.
+I wrote a custom `group_by` function in `data_utils.py` that takes a column-oriented table and a column name, splits each cell of that column on commas (so a student who knows `"Python, Java / C#"` is counted in both groups), and returns a `dict[str, dict[str, list[str]]]` keyed by the distinct category values. Using this, I grouped the merged table three ways and computed per-group averages across the six course-experience metrics, producing three complementary views of the student population. I also wrote a simple mean function that takes in a list and outputs a float. 
 
 ### Visualization 1 — Course ratings by language known
 
@@ -24,7 +24,7 @@ Students who know any given language fall into a subtable. Averaging each rating
 
 ### Visualization 2 — Share of responses by language
 
-The language averages are only as meaningful as their sample sizes. This pie chart shows each language's share of responses so the earlier bar chart can be read in context — a tall bar for `Stata` or `Go` represents a single respondent and should be read as noise.
+The language averages are only as meaningful as their sample sizes. This pie chart shows each language's share of responses so the earlier bar chart can be read in context - a tall bar for `Stata` or `Go` represents a single respondent and should be read as noise.
 
 ![Share of responses by language]({{ site.baseurl }}/static/imgs/viz_language_shares.png)
 
